@@ -75,6 +75,8 @@ function movePosition(){
 	if($windowWidth < 800){
 		// if below 800px insert after the title and above paragraph
 		$roleSection.parentNode.insertBefore($image, $roleSection)
+        $imageHold.remove();
+
 	} else {
 		// if above 800px move imageHold (sidebar loctaction)
 		$imageHold.appendChild($image);
