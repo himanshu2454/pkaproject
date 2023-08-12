@@ -1,36 +1,42 @@
 const body = document.body
-
 const btnTheme = document.querySelector('.fa-moon')
 const btnHamburger = document.querySelector('.fa-bars')
+const favicon = document.getElementById('favicon')
+const logo = document.getElementById('logo')
+const getBodyTheme = localStorage.getItem('portfolio-theme')
+const getBtnTheme = localStorage.getItem('portfolio-btn-theme')
 
 const addThemeClass = (bodyClass, btnClass) => {
   body.classList.add(bodyClass)
   btnTheme.classList.add(btnClass)
 }
 
-const getBodyTheme = localStorage.getItem('portfolio-theme')
-const getBtnTheme = localStorage.getItem('portfolio-btn-theme')
-
-addThemeClass(getBodyTheme, getBtnTheme)
-
 const isDark = () => body.classList.contains('dark')
-
 const setTheme = (bodyClass, btnClass) => {
+
+    if(bodyClass == 'dark'){
+        favicon.href = 'favicon-dark.ico'
+        logo.src = 'favicon-dark.ico'
+    }
+    if(bodyClass == 'light'){
+        favicon.href = 'favicon-light.ico'
+        logo.src = 'favicon-light.ico'
+    }
 
 	body.classList.remove(localStorage.getItem('portfolio-theme'))
 	btnTheme.classList.remove(localStorage.getItem('portfolio-btn-theme'))
 
-  addThemeClass(bodyClass, btnClass)
+    addThemeClass(bodyClass, btnClass)
 
 	localStorage.setItem('portfolio-theme', bodyClass)
 	localStorage.setItem('portfolio-btn-theme', btnClass)
 }
-
 const toggleTheme = () =>
 	isDark() ? setTheme('light', 'fa-moon') : setTheme('dark', 'fa-sun')
-
 btnTheme.addEventListener('click', toggleTheme)
+addThemeClass(getBodyTheme, getBtnTheme)
 
+//Navbar
 const displayList = () => {
 	const navUl = document.querySelector('.nav__list')
 
@@ -44,9 +50,9 @@ const displayList = () => {
 		navUl.classList.remove('display-nav-list')
 	}
 }
-
 btnHamburger.addEventListener('click', displayList)
 
+//Scroll
 const scrollUp = () => {
 	const btnScrollTop = document.querySelector('.scroll-top')
 
@@ -59,7 +65,6 @@ const scrollUp = () => {
 		btnScrollTop.style.display = 'none'
 	}
 }
-
 document.addEventListener('scroll', scrollUp)
 
 // MOVE ELEMENT DEPENDING ON SCREEN WIDTH
